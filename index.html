@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HFC - Home Fitness Club</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f1f9f8;
+      color: #333;
+    }
+
+    header {
+      background: #98d4bb;
+      color: #fff;
+      padding: 1em;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background: #c6efe4;
+      padding: 0.8em 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 2em;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .formules, .produits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 1em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #55a58f;
+    }
+
+    form {
+      background: #fff;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    form input, form select, form textarea, form button {
+      width: 100%;
+      padding: 0.7em;
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    form button {
+      background: #55a58f;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2em;
+      background: #98d4bb;
+      color: #fff;
+      margin-top: 2em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>HFC - Home Fitness Club</h1>
+    <p>Bien-être, sport & nutrition dans le 77, Paris</p>
+  </header>
+
+  <nav>
+    <a href="#formules">Formules</a>
+    <a href="#boutique">Boutique</a>
+    <a href="#reservation">Réserver</a>
+  </nav>
+
+  <section id="formules">
+    <h2>Accès & Formules VIP</h2>
+    <div class="formules">
+      <div class="card">
+        <h3>Formule Basic</h3>
+        <p>Accès illimité à la salle de sport (hors VIP)</p>
+        <p><strong>29€/mois</strong></p>
+      </div>
+      <div class="card">
+        <h3>Formule Premium</h3>
+        <p>Accès VIP + cours collectifs + espace bien-être</p>
+        <p><strong>59€/mois</strong></p>
+      </div>
+      <div class="card">
+        <h3>Pass Journée</h3>
+        <p>Accès 1 jour, salle + espace détente</p>
+        <p><strong>10€/jour</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="boutique">
+    <h2>Boutique Bien-être & Fitness</h2>
+    <div class="produits">
+      <div class="card">
+        <h3>Poké Bowl Protéiné</h3>
+        <img src="poke.jpg" alt="Poké Bowl" style="width:100%; border-radius:8px;">
+        <p>Saumon, quinoa, avocat, edamame, sauce sésame</p>
+        <p><strong>12€</strong></p>
+      </div>
+      <div class="card">
+        <h3>Tapis Yoga Antidérapant</h3>
+        <img src="yoga.jpg" alt="Tapis Yoga" style="width:100%; border-radius:8px;">
+        <p>Eco-friendly, parfait pour les séances douces</p>
+        <p><strong>25€</strong></p>
+      </div>
+      <div class="card">
+        <h3>Shake Protéiné Coco-Vanille</h3>
+        <img src="shake.jpg" alt="Shake" style="width:100%; border-radius:8px;">
+        <p>Boisson prête à consommer - 30g de protéines</p>
+        <p><strong>5€</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="reservation">
+    <h2>Réserver une séance ou une formule</h2>
+    <form>
+      <label for="nom">Nom complet</label>
+      <input type="text" id="nom" name="nom" required>
+
+      <label for="email">Adresse e-mail</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="formule">Choisir une formule</label>
+      <select id="formule" name="formule">
+        <option value="basic">Formule Basic</option>
+        <option value="premium">Formule Premium</option>
+        <option value="pass">Pass Journée</option>
+      </select>
+
+      <label for="message">Message (facultatif)</label>
+      <textarea id="message" name="message" rows="4"></textarea>
+
+      <button type="submit">Réserver maintenant</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 HFC - Home Fitness Club | Paris 77 | Bien-être & performance</p>
+  </footer>
+
+</body>
+</html>
