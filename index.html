@@ -1,261 +1,75 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#fefaf0">
-  <meta name="description" content="Lumière Express — la plateforme tout-en-un d'entraide entre particuliers : achats, ventes, dons, locations, services, emplois et logements, près de chez vous.">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Lumière Express — Tout Pour Tous</title>
-  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Lumière Express">
+  <meta name="theme-color" content="#fefaf0">
+  <link rel="manifest" href="/manifest.webmanifest?v=8">
+  <meta name="google-site-verification" content="458HPNIzuAznrFzvCGUSxSqAQ6BMvqMwVveGaG8sSBk">
+  <meta name="author" content="Lumière Express">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Lumière Express",
+    "url": "https://www.lumiereexpress.com/",
+    "description": "Un réseau social d'entraide entre particuliers : achats, ventes, dons, locations, services, emplois, logements, formations et activités, près de chez vous ou partout en France.",
+    "areaServed": "FR",
+    "sameAs": ["https://www.facebook.com/lumiereexpress.com/"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Lumière Express",
+    "url": "https://www.lumiereexpress.com/",
+    "inLanguage": "fr-FR",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.lumiereexpress.com/annonces-v2?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <link rel="canonical" href="https://www.lumiereexpress.com/">
+  <meta name="description" content="La plateforme tout-en-un d'entraide entre particuliers en France : annonces, dons, services, sorties et solidarité. Le numérique nous connecte, l'humain nous rapproche.">
+  <meta property="og:title" content="Lumière Express — Tout Pour Tous, la plateforme tout-en-un">
+  <meta property="og:description" content="La plateforme tout-en-un d'entraide entre particuliers en France : annonces, dons, services, sorties et solidarité. Le numérique nous connecte, l'humain nous rapproche.">
+  <meta property="og:url" content="https://www.lumiereexpress.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Lumière Express">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://www.lumiereexpress.com/__l5e/assets-v1/61971bfa-5db7-422d-868b-1c7bd7935a59/lumiere-express-coeur-partage.jpg">
+  <meta property="og:image:alt" content="Cœur doré et trois silhouettes — Lumière Express, Là où tout s’éclaire">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta name="twitter:image" content="https://www.lumiereexpress.com/__l5e/assets-v1/61971bfa-5db7-422d-868b-1c7bd7935a59/lumiere-express-coeur-partage.jpg">
+  <meta name="twitter:image:alt" content="Cœur doré et trois silhouettes — Lumière Express, Là où tout s’éclaire">
+  <meta name="twitter:title" content="Lumière Express — Tout Pour Tous, la plateforme tout-en-un">
+  <meta name="twitter:description" content="La plateforme tout-en-un d'entraide entre particuliers en France : annonces, dons, services, sorties et solidarité. Le numérique nous connecte, l'humain nous rapproche.">
+
+  <link rel="icon" href="/favicon-v8.png?v=1795376105799" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon-v8.png?v=1795376105800" type="image/png">
+
+  <title>Lumière Express — Tout Pour Tous, la plateforme tout-en-un</title>
+
+  <script type="module" crossorigin src="/assets/index-dFgr56nu.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Bx_4UknZ.css">
 </head>
+
 <body>
-  <div class="aurora" aria-hidden="true">
-    <span class="blob blob-1"></span>
-    <span class="blob blob-2"></span>
-    <span class="blob blob-3"></span>
-  </div>
-
-  <!-- ================= HEADER ================= -->
-  <header class="site-header glass">
-    <div class="header-inner">
-      <button class="icon-btn" id="shareBtn" aria-label="Partager le site" title="Partager">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-      </button>
-
-      <a class="brand" href="#" data-tab="accueil" aria-label="Lumière Express, accueil">
-        <span class="brand-heart">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.7-9.4-9.1C1 8.4 3.2 5 6.6 5c2 0 3.4 1.1 4.2 2.3l1.2 1.7 1.2-1.7C14 5.1 15.4 4 17.4 4 20.8 4 23 7.4 21.4 11.9 19.5 16.3 12 21 12 21z"/></svg>
-        </span>
-        <span class="brand-text">
-          <strong>Lumière<span>Express</span></strong>
-          <small>Tout Pour Tous</small>
-        </span>
-      </a>
-
-      <div class="header-actions">
-        <button class="pill-btn" id="myAdsBtn" type="button">Mes annonces</button>
-        <button class="icon-btn" id="publishTopBtn" aria-label="Publier une annonce">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <div class="search-wrap">
-      <label class="search glass-soft" for="searchInput">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
-        <input id="searchInput" type="search" placeholder="Que cherchez-vous autour de vous ?" autocomplete="off">
-        <button type="button" class="clear-search" id="clearSearch" aria-label="Effacer" hidden>&times;</button>
-      </label>
-      <button class="loc glass-soft" id="locBtn" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span id="locLabel">Partout en France</span>
-      </button>
-    </div>
-  </header>
-
-  <main id="main">
-    <!-- ================= ACCUEIL ================= -->
-    <section class="view is-active" id="view-accueil">
-      <div class="hello">
-        <p class="eyebrow">Le numérique nous connecte, l'humain nous rapproche</p>
-        <h1>Qu'est-ce qui s'éclaire<br><em>près de chez vous ?</em></h1>
-      </div>
-
-      <nav class="chips" id="chips" aria-label="Catégories">
-        <button class="chip is-active" data-cat="tout">Tout</button>
-        <button class="chip" data-cat="vente">Ventes</button>
-        <button class="chip" data-cat="achat">Achats</button>
-        <button class="chip" data-cat="don">Dons</button>
-        <button class="chip" data-cat="location">Locations</button>
-        <button class="chip" data-cat="service">Services</button>
-        <button class="chip" data-cat="emploi">Emplois</button>
-        <button class="chip" data-cat="logement">Logements</button>
-        <button class="chip" data-cat="formation">Formations</button>
-      </nav>
-
-      <div class="section-head">
-        <h2>À la une</h2>
-        <span class="count" id="resultCount"></span>
-      </div>
-
-      <div class="cards" id="cards" aria-live="polite"></div>
-
-      <div class="empty" id="emptyState" hidden>
-        <span class="empty-heart">✦</span>
-        <p>Aucune annonce ne correspond à votre recherche.</p>
-        <button class="primary-btn" data-tab="publier" type="button">Publier la première</button>
-      </div>
-
-      <section class="solidarity glass-soft">
-        <div>
-          <h3>Le coin solidarité</h3>
-          <p>Dons, coups de main, entraide de quartier : ici tout ne se vend pas, parfois ça se donne.</p>
-        </div>
-        <button class="ghost-btn" data-cat="don" type="button">Voir les dons</button>
-      </section>
-    </section>
-
-    <!-- ================= RECHERCHE ================= -->
-    <section class="view" id="view-recherche">
-      <h1 class="view-title">Recherche</h1>
-      <div class="filters glass-soft">
-        <label>Catégorie
-          <select id="filterCat">
-            <option value="tout">Toutes</option>
-            <option value="vente">Ventes</option>
-            <option value="achat">Achats</option>
-            <option value="don">Dons</option>
-            <option value="location">Locations</option>
-            <option value="service">Services</option>
-            <option value="emploi">Emplois</option>
-            <option value="logement">Logements</option>
-            <option value="formation">Formations</option>
-          </select>
-        </label>
-        <label>Ville
-          <input id="filterCity" type="text" placeholder="Ex. Lyon">
-        </label>
-        <label>Prix maximum
-          <input id="filterPrice" type="range" min="0" max="2000" step="50" value="2000">
-          <output id="priceOut">Tous les prix</output>
-        </label>
-        <button class="ghost-btn" id="resetFilters" type="button">Réinitialiser</button>
-      </div>
-      <div class="cards" id="searchCards"></div>
-      <div class="empty" id="searchEmpty" hidden><p>Aucun résultat avec ces filtres.</p></div>
-    </section>
-
-    <!-- ================= PUBLIER ================= -->
-    <section class="view" id="view-publier">
-      <h1 class="view-title">Publier une annonce</h1>
-      <form class="form glass" id="publishForm" novalidate>
-        <label class="field">
-          <span>Titre de l'annonce</span>
-          <input name="title" type="text" required maxlength="70" placeholder="Ex. Vélo de ville en très bon état">
-        </label>
-        <div class="row">
-          <label class="field">
-            <span>Catégorie</span>
-            <select name="cat" required>
-              <option value="vente">Vente</option>
-              <option value="achat">Achat</option>
-              <option value="don">Don</option>
-              <option value="location">Location</option>
-              <option value="service">Service</option>
-              <option value="emploi">Emploi</option>
-              <option value="logement">Logement</option>
-              <option value="formation">Formation</option>
-            </select>
-          </label>
-          <label class="field">
-            <span>Prix (€)</span>
-            <input name="price" type="number" min="0" step="1" placeholder="0 = don">
-          </label>
-        </div>
-        <div class="row">
-          <label class="field">
-            <span>Ville</span>
-            <input name="city" type="text" required placeholder="Ex. Bourges">
-          </label>
-          <label class="field">
-            <span>Votre prénom</span>
-            <input name="author" type="text" required placeholder="Ex. Camille">
-          </label>
-        </div>
-        <label class="field">
-          <span>Description</span>
-          <textarea name="desc" rows="4" maxlength="600" placeholder="Décrivez votre annonce en quelques lignes…"></textarea>
-        </label>
-        <label class="field">
-          <span>Photo (lien facultatif)</span>
-          <input name="photo" type="url" placeholder="https://…">
-        </label>
-        <label class="check">
-          <input type="checkbox" name="free" checked>
-          <span>J'accepte la charte de bienveillance Lumière Express</span>
-        </label>
-        <button class="primary-btn wide" type="submit">Mettre en lumière mon annonce</button>
-      </form>
-    </section>
-
-    <!-- ================= MESSAGES ================= -->
-    <section class="view" id="view-messages">
-      <h1 class="view-title">Messages</h1>
-      <div class="threads" id="threads"></div>
-    </section>
-
-    <!-- ================= PROFIL ================= -->
-    <section class="view" id="view-profil">
-      <h1 class="view-title">Mon profil</h1>
-      <div class="profile glass">
-        <div class="avatar" aria-hidden="true">C</div>
-        <div>
-          <h2>Camille</h2>
-          <p class="muted">Bourges · 18 · Membre depuis 2024</p>
-          <span class="badge">Profil de confiance</span>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat glass-soft"><strong id="statAds">0</strong><span>annonces</span></div>
-        <div class="stat glass-soft"><strong id="statFav">0</strong><span>favoris</span></div>
-        <div class="stat glass-soft"><strong>12</strong><span>échanges</span></div>
-      </div>
-      <h2 class="sub-title">Mes favoris</h2>
-      <div class="cards" id="favCards"></div>
-      <div class="empty" id="favEmpty"><p>Vous n'avez pas encore de favori.</p></div>
-    </section>
-  </main>
-
-  <!-- ================= TAB BAR ================= -->
-  <nav class="tabbar glass" aria-label="Navigation principale">
-    <button class="tab is-active" data-tab="accueil">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
-      <span>Accueil</span>
-    </button>
-    <button class="tab" data-tab="recherche">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
-      <span>Recherche</span>
-    </button>
-    <button class="tab tab-publish" data-tab="publier" aria-label="Publier">
-      <span class="tab-plus">+</span>
-      <span>Publier</span>
-    </button>
-    <button class="tab" data-tab="messages">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
-      <span>Messages</span>
-      <i class="dot"></i>
-    </button>
-    <button class="tab" data-tab="profil">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
-      <span>Profil</span>
-    </button>
-  </nav>
-
-  <!-- ================= MODAL DÉTAIL ================= -->
-  <div class="modal" id="modal" hidden>
-    <div class="modal-backdrop" data-close></div>
-    <div class="sheet glass" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="sheet-close" data-close aria-label="Fermer">&times;</button>
-      <div class="sheet-media" id="modalMedia"></div>
-      <span class="badge" id="modalCat"></span>
-      <h2 id="modalTitle"></h2>
-      <p class="price" id="modalPrice"></p>
-      <p class="muted" id="modalMeta"></p>
-      <p class="desc" id="modalDesc"></p>
-      <div class="sheet-actions">
-        <button class="primary-btn" id="modalContact" type="button">Contacter</button>
-        <button class="ghost-btn" id="modalFav" type="button">♡ Favori</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <script src="assets/app.js"></script>
+  <div id="root"></div>
+  <noscript>Lumière Express nécessite JavaScript pour s'afficher.</noscript>
 </body>
 </html>
