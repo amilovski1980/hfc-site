@@ -1,0 +1,20 @@
+{
+  "name": "Lumière Express",
+  "short_name": "Lumière Express",
+  "description": "La plateforme tout-en-un d'entraide entre particuliers en France : annonces, dons, services, sorties et solidarité.",
+  "lang": "fr-FR",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fefaf0",
+  "theme_color": "#0a2540",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
