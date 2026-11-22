@@ -1,255 +1,261 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HFC - Home Fitness Club</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: #f1f9f8;
-      color: #333;
-    }
-
-    header {
-      background: #98d4bb;
-      color: #fff;
-      padding: 1em;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    header img {
-      height: 40px;
-    }
-
-    .header-title {
-      flex: 1;
-      text-align: center;
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 1.5em;
-      cursor: pointer;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      background: #c6efe4;
-      padding: 0.8em 0;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
-
-    .slider {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-    }
-
-    .slide {
-      min-width: 100%;
-      scroll-snap-align: center;
-    }
-
-    .slide img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    section {
-      padding: 2em;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .formules, .produits {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 10px;
-      padding: 1em;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .card h3 {
-      margin-top: 0;
-      color: #55a58f;
-    }
-
-    .quantite {
-      font-size: 0.9em;
-      color: #777;
-      margin-top: 5px;
-    }
-
-    form {
-      background: #fff;
-      padding: 2em;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    form input, form select, form textarea, form button {
-      width: 100%;
-      padding: 0.7em;
-      margin-bottom: 1em;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    form button {
-      background: #55a58f;
-      color: white;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2em;
-      background: #98d4bb;
-      color: #fff;
-      margin-top: 2em;
-    }
-
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-        padding: 0.5em;
-      }
-      nav {
-        flex-direction: column;
-        display: none;
-      }
-      nav.active {
-        display: flex;
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#fefaf0">
+  <meta name="description" content="Lumière Express — la plateforme tout-en-un d'entraide entre particuliers : achats, ventes, dons, locations, services, emplois et logements, près de chez vous.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Lumière Express — Tout Pour Tous</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-
-  <header>
-    <img src="logo.png" alt="Logo HFC" />
-    <div class="header-title">
-      <h1>HFC - Home Fitness Club</h1>
-      <p>Bien-être, sport & nutrition dans le 77, Paris</p>
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-  </header>
-
-  <nav id="navbar">
-    <a href="#formules">Formules</a>
-    <a href="#boutique">Boutique</a>
-    <a href="#reservation">Réserver</a>
-  </nav>
-
-  <div class="slider">
-    <div class="slide"><img src="salle1.jpg" alt="Salle 1" /></div>
-    <div class="slide"><img src="salle2.jpg" alt="Salle 2" /></div>
-    <div class="slide"><img src="salle3.jpg" alt="Salle 3" /></div>
+  <div class="aurora" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
   </div>
 
-  <section id="formules">
-    <h2>Accès & Formules VIP</h2>
-    <div class="formules">
-      <div class="card">
-        <h3>Formule Basic</h3>
-        <p>Accès illimité à la salle de sport (hors VIP)</p>
-        <p><strong>29€/mois</strong></p>
-      </div>
-      <div class="card">
-        <h3>Formule Premium</h3>
-        <p>Accès VIP + cours collectifs + espace bien-être</p>
-        <p><strong>59€/mois</strong></p>
-      </div>
-      <div class="card">
-        <h3>Pass Journée</h3>
-        <p>Accès 1 jour, salle + espace détente</p>
-        <p><strong>10€/jour</strong></p>
-      </div>
-    </div>
-  </section>
+  <!-- ================= HEADER ================= -->
+  <header class="site-header glass">
+    <div class="header-inner">
+      <button class="icon-btn" id="shareBtn" aria-label="Partager le site" title="Partager">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      </button>
 
-  <section id="boutique">
-    <h2>Boutique Bien-être & Fitness</h2>
-    <div class="produits">
-      <div class="card">
-        <h3>Poké Bowl Protéiné</h3>
-        <img src="poke.jpg" alt="Poké Bowl" style="width:100%; border-radius:8px;">
-        <p>Saumon, quinoa, avocat, edamame, sauce sésame</p>
-        <p><strong>12€</strong></p>
-        <p class="quantite">Quantité disponible : 25</p>
-      </div>
-      <div class="card">
-        <h3>Tapis Yoga Antidérapant</h3>
-        <img src="yoga.jpg" alt="Tapis Yoga" style="width:100%; border-radius:8px;">
-        <p>Eco-friendly, parfait pour les séances douces</p>
-        <p><strong>25€</strong></p>
-        <p class="quantite">Quantité disponible : 12</p>
-      </div>
-      <div class="card">
-        <h3>Shake Protéiné Coco-Vanille</h3>
-        <img src="shake.jpg" alt="Shake" style="width:100%; border-radius:8px;">
-        <p>Boisson prête à consommer - 30g de protéines</p>
-        <p><strong>5€</strong></p>
-        <p class="quantite">Quantité disponible : 40</p>
+      <a class="brand" href="#" data-tab="accueil" aria-label="Lumière Express, accueil">
+        <span class="brand-heart">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.7-9.4-9.1C1 8.4 3.2 5 6.6 5c2 0 3.4 1.1 4.2 2.3l1.2 1.7 1.2-1.7C14 5.1 15.4 4 17.4 4 20.8 4 23 7.4 21.4 11.9 19.5 16.3 12 21 12 21z"/></svg>
+        </span>
+        <span class="brand-text">
+          <strong>Lumière<span>Express</span></strong>
+          <small>Tout Pour Tous</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <button class="pill-btn" id="myAdsBtn" type="button">Mes annonces</button>
+        <button class="icon-btn" id="publishTopBtn" aria-label="Publier une annonce">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
       </div>
     </div>
-  </section>
 
-  <section id="reservation">
-    <h2>Réserver une séance ou une formule</h2>
-    <form>
-      <label for="nom">Nom complet</label>
-      <input type="text" id="nom" name="nom" required />
+    <div class="search-wrap">
+      <label class="search glass-soft" for="searchInput">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        <input id="searchInput" type="search" placeholder="Que cherchez-vous autour de vous ?" autocomplete="off">
+        <button type="button" class="clear-search" id="clearSearch" aria-label="Effacer" hidden>&times;</button>
+      </label>
+      <button class="loc glass-soft" id="locBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span id="locLabel">Partout en France</span>
+      </button>
+    </div>
+  </header>
 
-      <label for="email">Adresse e-mail</label>
-      <input type="email" id="email" name="email" required />
+  <main id="main">
+    <!-- ================= ACCUEIL ================= -->
+    <section class="view is-active" id="view-accueil">
+      <div class="hello">
+        <p class="eyebrow">Le numérique nous connecte, l'humain nous rapproche</p>
+        <h1>Qu'est-ce qui s'éclaire<br><em>près de chez vous ?</em></h1>
+      </div>
 
-      <label for="formule">Choisir une formule</label>
-      <select id="formule" name="formule">
-        <option value="basic">Formule Basic</option>
-        <option value="premium">Formule Premium</option>
-        <option value="pass">Pass Journée</option>
-      </select>
+      <nav class="chips" id="chips" aria-label="Catégories">
+        <button class="chip is-active" data-cat="tout">Tout</button>
+        <button class="chip" data-cat="vente">Ventes</button>
+        <button class="chip" data-cat="achat">Achats</button>
+        <button class="chip" data-cat="don">Dons</button>
+        <button class="chip" data-cat="location">Locations</button>
+        <button class="chip" data-cat="service">Services</button>
+        <button class="chip" data-cat="emploi">Emplois</button>
+        <button class="chip" data-cat="logement">Logements</button>
+        <button class="chip" data-cat="formation">Formations</button>
+      </nav>
 
-      <label for="message">Message (facultatif)</label>
-      <textarea id="message" name="message" rows="4"></textarea>
+      <div class="section-head">
+        <h2>À la une</h2>
+        <span class="count" id="resultCount"></span>
+      </div>
 
-      <button type="submit">Réserver maintenant</button>
-    </form>
-  </section>
+      <div class="cards" id="cards" aria-live="polite"></div>
 
-  <footer>
-    <p>&copy; 2025 HFC - Home Fitness Club | Paris 77 | Bien-être & performance</p>
-  </footer>
+      <div class="empty" id="emptyState" hidden>
+        <span class="empty-heart">✦</span>
+        <p>Aucune annonce ne correspond à votre recherche.</p>
+        <button class="primary-btn" data-tab="publier" type="button">Publier la première</button>
+      </div>
 
-  <script>
-    function toggleMenu() {
-      const nav = document.getElementById('navbar');
-      nav.classList.toggle('active');
-    }
-  </script>
+      <section class="solidarity glass-soft">
+        <div>
+          <h3>Le coin solidarité</h3>
+          <p>Dons, coups de main, entraide de quartier : ici tout ne se vend pas, parfois ça se donne.</p>
+        </div>
+        <button class="ghost-btn" data-cat="don" type="button">Voir les dons</button>
+      </section>
+    </section>
+
+    <!-- ================= RECHERCHE ================= -->
+    <section class="view" id="view-recherche">
+      <h1 class="view-title">Recherche</h1>
+      <div class="filters glass-soft">
+        <label>Catégorie
+          <select id="filterCat">
+            <option value="tout">Toutes</option>
+            <option value="vente">Ventes</option>
+            <option value="achat">Achats</option>
+            <option value="don">Dons</option>
+            <option value="location">Locations</option>
+            <option value="service">Services</option>
+            <option value="emploi">Emplois</option>
+            <option value="logement">Logements</option>
+            <option value="formation">Formations</option>
+          </select>
+        </label>
+        <label>Ville
+          <input id="filterCity" type="text" placeholder="Ex. Lyon">
+        </label>
+        <label>Prix maximum
+          <input id="filterPrice" type="range" min="0" max="2000" step="50" value="2000">
+          <output id="priceOut">Tous les prix</output>
+        </label>
+        <button class="ghost-btn" id="resetFilters" type="button">Réinitialiser</button>
+      </div>
+      <div class="cards" id="searchCards"></div>
+      <div class="empty" id="searchEmpty" hidden><p>Aucun résultat avec ces filtres.</p></div>
+    </section>
+
+    <!-- ================= PUBLIER ================= -->
+    <section class="view" id="view-publier">
+      <h1 class="view-title">Publier une annonce</h1>
+      <form class="form glass" id="publishForm" novalidate>
+        <label class="field">
+          <span>Titre de l'annonce</span>
+          <input name="title" type="text" required maxlength="70" placeholder="Ex. Vélo de ville en très bon état">
+        </label>
+        <div class="row">
+          <label class="field">
+            <span>Catégorie</span>
+            <select name="cat" required>
+              <option value="vente">Vente</option>
+              <option value="achat">Achat</option>
+              <option value="don">Don</option>
+              <option value="location">Location</option>
+              <option value="service">Service</option>
+              <option value="emploi">Emploi</option>
+              <option value="logement">Logement</option>
+              <option value="formation">Formation</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Prix (€)</span>
+            <input name="price" type="number" min="0" step="1" placeholder="0 = don">
+          </label>
+        </div>
+        <div class="row">
+          <label class="field">
+            <span>Ville</span>
+            <input name="city" type="text" required placeholder="Ex. Bourges">
+          </label>
+          <label class="field">
+            <span>Votre prénom</span>
+            <input name="author" type="text" required placeholder="Ex. Camille">
+          </label>
+        </div>
+        <label class="field">
+          <span>Description</span>
+          <textarea name="desc" rows="4" maxlength="600" placeholder="Décrivez votre annonce en quelques lignes…"></textarea>
+        </label>
+        <label class="field">
+          <span>Photo (lien facultatif)</span>
+          <input name="photo" type="url" placeholder="https://…">
+        </label>
+        <label class="check">
+          <input type="checkbox" name="free" checked>
+          <span>J'accepte la charte de bienveillance Lumière Express</span>
+        </label>
+        <button class="primary-btn wide" type="submit">Mettre en lumière mon annonce</button>
+      </form>
+    </section>
+
+    <!-- ================= MESSAGES ================= -->
+    <section class="view" id="view-messages">
+      <h1 class="view-title">Messages</h1>
+      <div class="threads" id="threads"></div>
+    </section>
+
+    <!-- ================= PROFIL ================= -->
+    <section class="view" id="view-profil">
+      <h1 class="view-title">Mon profil</h1>
+      <div class="profile glass">
+        <div class="avatar" aria-hidden="true">C</div>
+        <div>
+          <h2>Camille</h2>
+          <p class="muted">Bourges · 18 · Membre depuis 2024</p>
+          <span class="badge">Profil de confiance</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat glass-soft"><strong id="statAds">0</strong><span>annonces</span></div>
+        <div class="stat glass-soft"><strong id="statFav">0</strong><span>favoris</span></div>
+        <div class="stat glass-soft"><strong>12</strong><span>échanges</span></div>
+      </div>
+      <h2 class="sub-title">Mes favoris</h2>
+      <div class="cards" id="favCards"></div>
+      <div class="empty" id="favEmpty"><p>Vous n'avez pas encore de favori.</p></div>
+    </section>
+  </main>
+
+  <!-- ================= TAB BAR ================= -->
+  <nav class="tabbar glass" aria-label="Navigation principale">
+    <button class="tab is-active" data-tab="accueil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
+      <span>Accueil</span>
+    </button>
+    <button class="tab" data-tab="recherche">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <span>Recherche</span>
+    </button>
+    <button class="tab tab-publish" data-tab="publier" aria-label="Publier">
+      <span class="tab-plus">+</span>
+      <span>Publier</span>
+    </button>
+    <button class="tab" data-tab="messages">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+      <span>Messages</span>
+      <i class="dot"></i>
+    </button>
+    <button class="tab" data-tab="profil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+      <span>Profil</span>
+    </button>
+  </nav>
+
+  <!-- ================= MODAL DÉTAIL ================= -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="sheet glass" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="sheet-close" data-close aria-label="Fermer">&times;</button>
+      <div class="sheet-media" id="modalMedia"></div>
+      <span class="badge" id="modalCat"></span>
+      <h2 id="modalTitle"></h2>
+      <p class="price" id="modalPrice"></p>
+      <p class="muted" id="modalMeta"></p>
+      <p class="desc" id="modalDesc"></p>
+      <div class="sheet-actions">
+        <button class="primary-btn" id="modalContact" type="button">Contacter</button>
+        <button class="ghost-btn" id="modalFav" type="button">♡ Favori</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/app.js"></script>
 </body>
 </html>
