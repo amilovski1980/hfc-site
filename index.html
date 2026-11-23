@@ -2,40 +2,37 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Petites Annonces - Démonstration</title>
+    <meta name="description" content="Démonstration de petites annonces : vélo, canapé et console de jeux.">
     <link rel="stylesheet" href="style.css">
-        body {font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5;}
-        header {background:#4CAF50; color:white; padding:1rem; text-align:center;}
-        .container {max-width:800px; margin:auto; padding:1rem;}
-        .ad {background:white; margin:1rem 0; padding:1rem; border-radius:5px; box-shadow:0 2px 4px rgba(0,0,0,0.1);}
-        .ad h2 {margin-top:0;}
-        .price {color:#e91e63; font-weight:bold;}
-        .contact {margin-top:0.5rem; font-size:0.9rem; color:#555;}
-    </style>
 </head>
 <body>
 <header>
     <h1>Petites Annonces - Démonstration</h1>
 </header>
-<div class="container">
-    <div class="ad">
+
+<main class="container">
+    <article class="ad">
         <h2>Vélo de ville - 2020</h2>
         <p>Vélo en bon état, idéal pour les déplacements urbains. Cadre en aluminium, 7 vitesses.</p>
         <p class="price">150 €</p>
-        <p class="contact">Contact : jean@example.com</p>
-    </div>
-    <div class="ad">
+        <p class="contact">Contact : <a href="mailto:jean@example.com">jean@example.com</a></p>
+    </article>
+
+    <article class="ad">
         <h2>Sofa 3 places - comme neuf</h2>
         <p>Sofa gris clair, très confortable, acheté il y a 6 mois. Aucun défaut.</p>
         <p class="price">250 €</p>
-        <p class="contact">Contact : marie@example.com</p>
-    </div>
-    <div class="ad">
+        <p class="contact">Contact : <a href="mailto:marie@example.com">marie@example.com</a></p>
+    </article>
+
+    <article class="ad">
         <h2>Console de jeux PlayStation 5</h2>
-        <p>Console neuve, boîte scellée. Jeux inclus : Spider‑Man, Ratchet & Clank.</p>
+        <p>Console neuve, boîte scellée. Jeux inclus : Spider-Man, Ratchet &amp; Clank.</p>
         <p class="price">450 €</p>
-        <p class="contact">Contact : pierre@example.com</p>
-    </div>
-</div>
+        <p class="contact">Contact : <a href="mailto:pierre@example.com">pierre@example.com</a></p>
+    </article>
+</main>
 </body>
 </html>
