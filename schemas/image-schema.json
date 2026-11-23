@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Image",
+  "type": "object",
+  "required": ["id", "url", "alt"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identifiant unique de l'image."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL de l'image."
+    },
+    "alt": {
+      "type": "string",
+      "description": "Texte alternatif pour l'accessibilité."
+    },
+    "title": {
+      "type": "string",
+      "description": "Titre affiché sous l'image (optionnel)."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description détaillée de l'image (optionnel)."
+    }
+  },
+  "additionalProperties": false
+}
