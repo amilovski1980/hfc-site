@@ -1,62 +1,41 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Lumière Express">
-    <meta name="theme-color" content="#fefaf0">
-    <link rel="manifest" href="/manifest.webmanifest?v=8">
-    <meta name="google-site-verification" content="458HPNIzuAznrFzvCGUSxSqAQ6BMvqMwVveGaG8sSBk">
-    <meta name="author" content="Lumière Express">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <title>Lumière Express — Tout Pour Tous, la plateforme tout-en-un</title>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Lumière Express",
-        "url": "https://www.lumiereexpress.com/",
-        "description": "Un réseau social d'entraide entre particuliers : achats, ventes, dons, locations, services, emplois, logements, formations et activités, près de chez vous ou partout en France.",
-        "areaServed": "FR",
-        "sameAs": ["https://www.facebook.com/lumiereexpress.com/"]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Lumière Express",
-        "url": "https://www.lumiereexpress.com/",
-        "inLanguage": "fr-FR",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://www.lumiereexpress.com/annonces-v2?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
-    </script>
-    <link rel="stylesheet" href="assets/index.css">
-    <script type="module" src="assets/index.js" defer></script>
-    <link rel="canonical" href="https://www.lumiereexpress.com/" />
-    <meta name="description" content="La plateforme tout-en-un d'entraide entre particuliers en France : annonces, dons, services, sorties et solidarité. Le numérique nous connecte, l'humain nous rapproche.">
-    <meta property="og:title" content="Lumière Express — Tout Pour Tous, la plateforme tout-en-un" />
-    <meta property="og:description" content="La plateforme tout-en-un d'entraide entre particuliers en France : annonces, dons, services, sorties et solidarité. Le numérique nous connecte, l'humain nous rapproche." />
-    <meta property="og:url" content="https://www.lumiereexpress.com/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Lumière Express" />
-    <meta property="og:locale" content="fr_FR" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta property="og:image" content="assets/lumiere-express-coeur-partage.jpg" />
-    <meta property="og:image:alt" content="Cœur doré et trois silhouettes — Lumière Express, Là où tout s’éclaire" />
-    <meta name="twitter:image" content="assets/lumiere-express-coeur-partage.jpg" />
-    <link rel="icon" href="favicon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" type="image/png" />
+    <title>Petites Annonces - Démonstration</title>
+    <style>
+        body {font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5;}
+        header {background:#4CAF50; color:white; padding:1rem; text-align:center;}
+        .container {max-width:800px; margin:auto; padding:1rem;}
+        .ad {background:white; margin:1rem 0; padding:1rem; border-radius:5px; box-shadow:0 2px 4px rgba(0,0,0,0.1);}
+        .ad h2 {margin-top:0;}
+        .price {color:#e91e63; font-weight:bold;}
+        .contact {margin-top:0.5rem; font-size:0.9rem; color:#555;}
+    </style>
 </head>
 <body>
-    <div id="root"></div>
+<header>
+    <h1>Petites Annonces - Démonstration</h1>
+</header>
+<div class="container">
+    <div class="ad">
+        <h2>Vélo de ville - 2020</h2>
+        <p>Vélo en bon état, idéal pour les déplacements urbains. Cadre en aluminium, 7 vitesses.</p>
+        <p class="price">150 €</p>
+        <p class="contact">Contact : jean@example.com</p>
+    </div>
+    <div class="ad">
+        <h2>Sofa 3 places - comme neuf</h2>
+        <p>Sofa gris clair, très confortable, acheté il y a 6 mois. Aucun défaut.</p>
+        <p class="price">250 €</p>
+        <p class="contact">Contact : marie@example.com</p>
+    </div>
+    <div class="ad">
+        <h2>Console de jeux PlayStation 5</h2>
+        <p>Console neuve, boîte scellée. Jeux inclus : Spider‑Man, Ratchet & Clank.</p>
+        <p class="price">450 €</p>
+        <p class="contact">Contact : pierre@example.com</p>
+    </div>
+</div>
 </body>
 </html>
