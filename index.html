@@ -3,52 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumière Express | L'Éclat du Partage</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Lumière Express | L'Éclat des Annonces</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #00d2ff;
-            --secondary-color: #3a7bd5;
-            --bg-gradient: linear-gradient(135deg, #e0f2f1 0%, #ffffff 50%, #f0f4f8 100%);
-            --glass-bg: rgba(255, 255, 255, 0.4);
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #ec4899;
+            --glass: rgba(255, 255, 255, 0.4);
             --glass-border: rgba(255, 255, 255, 0.6);
-            --text-main: #2c3e50;
-            --text-muted: #546e7a;
-            --accent-glow: rgba(0, 210, 255, 0.3);
-            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: var(--bg-gradient);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
             background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
-            padding-bottom: 100px;
         }
 
+        /* Background Blobs pour l'effet visuel */
         .blob {
             position: fixed;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(255,255,255,0) 70%);
+            width: 500px;
+            height: 500px;
+            filter: blur(80px);
             z-index: -1;
-            filter: blur(50px);
+            opacity: 0.5;
+            border-radius: 50%;
             animation: move 20s infinite alternate;
         }
-        .blob-1 { top: -100px; left: -100px; }
-        .blob-2 { bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(58, 123, 213, 0.2) 0%, rgba(255,255,255,0) 70%); }
+        .blob-1 { background: #c3dafe; top: -10%; left: -10%; }
+        .blob-2 { background: #fbcfe8; bottom: -10%; right: -10%; animation-delay: -5s; }
+        .blob-3 { background: #ddd6fe; top: 40%; left: 30%; animation-delay: -10s; }
 
         @keyframes move {
-            from { transform: translate(0, 0); }
-            to { transform: translate(100px, 100px); }
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(100px, 50px) scale(1.1); }
         }
 
         header {
@@ -60,105 +61,137 @@
         .logo {
             font-size: 2.5rem;
             font-weight: 800;
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            background: linear-gradient(to right, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
             letter-spacing: -1px;
+            margin-bottom: 10px;
         }
 
         .tagline {
             color: var(--text-muted);
             font-size: 1.1rem;
-            opacity: 0.8;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            font-weight: 400;
         }
 
         .search-container {
-            margin: 30px auto;
             max-width: 600px;
-            position: relative;
+            margin: 30px auto;
+            padding: 10px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             animation: fadeInUp 0.8s ease-out;
         }
 
-        .search-bar {
-            width: 100%;
-            padding: 18px 25px;
-            border-radius: 50px;
-            border: 1px solid var(--glass-border);
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            box-shadow: var(--shadow);
+        .search-container input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 15px 20px;
             font-size: 1rem;
-            color: var(--text-main);
+            font-family: inherit;
             outline: none;
+            color: var(--text-main);
+        }
+
+        .search-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 20px 40px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .cat-pill {
+            padding: 10px 20px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .search-bar:focus {
-            background: rgba(255, 255, 255, 0.6);
-            box-shadow: 0 8px 32px 0 rgba(0, 210, 255, 0.2);
-            border-color: var(--primary-color);
+        .cat-pill:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
-            margin-top: 40px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto 100px;
         }
 
         .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 20px;
-            box-shadow: var(--shadow);
+            border-radius: 30px;
+            overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            animation: fadeInUp 1s ease-out both;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
         }
 
         .card:hover {
             transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
             background: rgba(255, 255, 255, 0.6);
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.05);
-            border-color: var(--primary-color);
         }
 
         .card-img {
             width: 100%;
-            height: 180px;
-            background: #f8f9fa;
-            border-radius: 18px;
-            margin-bottom: 15px;
+            height: 200px;
+            background: #eee;
             object-fit: cover;
-            transition: transform 0.3s ease;
         }
 
-        .card:hover .card-img {
-            transform: scale(1.05);
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-main);
+        .card-content {
+            padding: 20px;
         }
 
         .card-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--secondary-color);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
             margin-bottom: 10px;
         }
 
@@ -166,86 +199,53 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
         }
 
+        /* Tab Bar Ultra-Moderne */
         .tab-bar {
             position: fixed;
             bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
-            max-width: 450px;
-            height: 70px;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: 35px;
+            border-radius: 40px;
+            padding: 10px 20px;
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            gap: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             z-index: 1000;
-            padding: 0 10px;
+            animation: fadeInUp 1.2s ease-out;
         }
 
         .tab-item {
+            width: 50px;
+            height: 50px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.7rem;
-            font-weight: 500;
+            font-size: 1.5rem;
             transition: all 0.3s ease;
-            width: 60px;
-            height: 60px;
-            border-radius: 20px;
             position: relative;
         }
 
-        .tab-item i {
-            font-size: 1.4rem;
-            margin-bottom: 4px;
-            transition: all 0.3s ease;
-        }
-
         .tab-item.active {
-            color: var(--primary-color);
-        }
-
-        .tab-item.active i {
+            color: var(--primary);
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transform: translateY(-5px);
-            text-shadow: 0 0 10px var(--accent-glow);
         }
 
-        .tab-item:hover {
-            background: rgba(255, 255, 255, 0.8);
-            color: var(--primary-color);
-        }
-
-        .tab-item.add-btn {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            margin-top: -30px;
-            box-shadow: 0 8px 20px var(--accent-glow);
-            border: 4px solid white;
-        }
-
-        .tab-item.add-btn i {
-            margin-bottom: 0;
-            font-size: 1.6rem;
-        }
-
-        .tab-item.add-btn:hover {
-            transform: scale(1.1) rotate(90deg);
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+        .tab-item:hover:not(.active) {
+            color: var(--primary);
+            background: rgba(255,255,255,0.5);
         }
 
         @keyframes fadeInDown {
@@ -260,7 +260,8 @@
 
         @media (max-width: 600px) {
             .logo { font-size: 2rem; }
-            .grid { grid-template-columns: 1fr; }
+            .search-container { margin: 20px; }
+            .grid { padding: 15px; gap: 15px; }
         }
     </style>
 </head>
@@ -268,108 +269,85 @@
 
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
 
     <header>
         <div class="logo">Lumière Express</div>
-        <div class="tagline">L'éclat du partage entre particuliers</div>
+        <div class="tagline">L'éclat d'une nouvelle façon de vendre</div>
     </header>
 
-    <div class="container">
-        <div class="search-container">
-            <input type="text" class="search-bar" placeholder="Que recherchez-vous aujourd'hui ?">
-        </div>
+    <div class="search-container">
+        <input type="text" placeholder="Que recherchez-vous aujourd'hui ?">
+        <button class="search-btn">Chercher</button>
+    </div>
 
-        <div class="grid">
-            <div class="card" style="animation-delay: 0.1s">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e56471468d8?w=500&q=80" alt="Produit" class="card-img">
-                <div class="card-title">Casque Audio Premium</div>
+    <div class="categories">
+        <div class="cat-pill">✨ Tout</div>
+        <div class="cat-pill">📱 Tech</div>
+        <div class="cat-pill">🏠 Maison</div>
+        <div class="cat-pill">🚗 Auto</div>
+        <div class="cat-pill">🎨 Art</div>
+        <div class="cat-pill">👔 Mode</div>
+    </div>
+
+    <div class="grid">
+        <!-- Card 1 -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" class="card-img" alt="Produit">
+            <div class="card-content">
                 <div class="card-price">120 €</div>
+                <div class="card-title">Casque Audio Premium</div>
                 <div class="card-footer">
-                    <span><i class="fa-solid fa-location-dot"></i> Paris</span>
+                    <span>Paris, FR</span>
                     <span>Il y a 2h</span>
                 </div>
             </div>
-            <div class="card" style="animation-delay: 0.2s">
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" alt="Produit" class="card-img">
-                <div class="card-title">Montre Minimaliste</div>
+        </div>
+        <!-- Card 2 -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" class="card-img" alt="Produit">
+            <div class="card-content">
                 <div class="card-price">85 €</div>
+                <div class="card-title">Montre Minimaliste</div>
                 <div class="card-footer">
-                    <span><i class="fa-solid fa-location-dot"></i> Lyon</span>
+                    <span>Lyon, FR</span>
                     <span>Il y a 5h</span>
                 </div>
             </div>
-            <div class="card" style="animation-delay: 0.3s">
-                <img src="https://images.unsplash.com/photo-1542291026-704266067591?w=500&q=80" alt="Produit" class="card-img">
-                <div class="card-title">Appareil Photo Vintage</div>
-                <div class="card-price">210 €</div>
+        </div>
+        <!-- Card 3 -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" class="card-img" alt="Produit">
+            <div class="card-content">
+                <div class="card-price">150 €</div>
+                <div class="card-title">Sneakers Limited Edition</div>
                 <div class="card-footer">
-                    <span><i class="fa-solid fa-location-dot"></i> Marseille</span>
+                    <span>Marseille, FR</span>
                     <span>Il y a 1j</span>
                 </div>
             </div>
-            <div class="card" style="animation-delay: 0.4s">
-                <img src="https://images.unsplash.com/photo-1585333124946-9757667d674d?w=500&q=80" alt="Produit" class="card-img">
-                <div class="card-title">Sac à Dos Voyage</div>
+        </div>
+        <!-- Card 4 -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1585333124941-6756a7799237?w=500" class="card-img" alt="Produit">
+            <div class="card-content">
                 <div class="card-price">45 €</div>
+                <div class="card-title">Lampe Design Nordique</div>
                 <div class="card-footer">
-                    <span><i class="fa-solid fa-location-dot"></i> Bordeaux</span>
+                    <span>Lille, FR</span>
                     <span>Il y a 3h</span>
-                </div>
-            </div>
-            <div class="card" style="animation-delay: 0.5s">
-                <img src="https://images.unsplash.com/photo-1526170375885-4a30967395a7?w=500&q=80" alt="Produit" class="card-img">
-                <div class="card-title">Polaroid Instantané</div>
-                <div class="card-price">60 €</div>
-                <div class="card-footer">
-                    <span><i class="fa-solid fa-location-dot"></i> Lille</span>
-                    <span>Il y a 12h</span>
-                </div>
-            </div>
-            <div class="card" style="animation-delay: 0.6s">
-                <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&q=80" alt="Produit" class="card-img">
-                <div class="card-title">Lunettes de Soleil</div>
-                <div class="card-price">30 €</div>
-                <div class="card-footer">
-                    <span><i class="fa-solid fa-location-dot"></i> Nice</span>
-                    <span>Il y a 8h</span>
                 </div>
             </div>
         </div>
     </div>
 
     <nav class="tab-bar">
-        <a href="#" class="tab-item active">
-            <i class="fa-solid fa-house"></i>
-            <span>Accueil</span>
-        </a>
-        <a href="#" class="tab-item">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <span>Explorer</span>
-        </a>
-        <a href="#" class="tab-item add-btn">
-            <i class="fa-solid fa-plus"></i>
-        </a>
-        <a href="#" class="tab-item">
-            <i class="fa-solid fa-heart"></i>
-            <span>Favoris</span>
-        </a>
-        <a href="#" class="tab-item">
-            <i class="fa-solid fa-user"></i>
-            <span>Profil</span>
-        </a>
+        <a href="#" class="tab-item active">🏠</a>
+        <a href="#" class="tab-item">🔍</a>
+        <a href="#" class="tab-item" style="font-size: 1.8rem; color: var(--primary);">➕</a>
+        <a href="#" class="tab-item">❤️</a>
+        <a href="#" class="tab-item">👤</a>
     </nav>
 
-    <script>
-        const tabs = document.querySelectorAll('.tab-item');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function(e) {
-                if(!this.classList.contains('add-btn')) {
-                    e.preventDefault();
-                    tabs.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                }
-            });
-        });
-    </script>
 </body>
 </html>
