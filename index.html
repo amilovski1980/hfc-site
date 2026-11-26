@@ -1,663 +1,86 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Lumière Express | Glassmorphism</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-<style>
-
-:root {
-
---primary: #00d2ff;
-
---secondary: #3a7bd5;
-
---accent: #00ff88;
-
---bg-gradient: linear-gradient(135deg, #e0f2f1 0%, #ffffff 100%);
-
---glass: rgba(255, 255, 255, 0.4);
-
---glass-border: rgba(255, 255, 255, 0.6);
-
---text-main: #2d3436;
-
---text-muted: #636e72;
-
-}
-
-{ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-body {
-
-background: var(--bg-gradient);
-
-min-height: 100vh;
-
-color: var(--text-main);
-
-overflow-x: hidden;
-
-padding-bottom: 100px;
-
-}
-
-.blob {
-
-position: fixed;
-
-width: 400px;
-
-height: 400px;
-
-background: var(--primary);
-
-filter: blur(80px);
-
-opacity: 0.2;
-
-z-index: -1;
-
-border-radius: 50%;
-
-}
-
-.blob-1 { top: -100px; right: -100px; background: #a29bfe; }
-
-.blob-2 { bottom: -100px; left: -100px; background: #81ecec; }
-
-header { padding: 2rem 1.5rem; text-align: center; }
-
-.logo {
-
-font-size: 2rem;
-
-font-weight: 800;
-
-background: linear-gradient(to right, var(--primary), var(--secondary));
-
--webkit-background-clip: text;
-
--webkit-text-fill-color: transparent;
-
-margin-bottom: 1.5rem;
-
-}
-
-.search-container {
-
-display: flex;
-
-gap: 10px;
-
-max-width: 600px;
-
-margin: 0 auto 2rem;
-
-padding: 8px;
-
-background: var(--glass);
-
-backdrop-filter: blur(20px);
-
-border: 1px solid var(--glass-border);
-
-border-radius: 24px;
-
-box-shadow: 0 8px 32px rgba(0,0,0,0.05);
-
-}
-
-.search-input {
-
-flex: 1;
-
-border: none;
-
-background: transparent;
-
-padding: 12px 15px;
-
-font-size: 1rem;
-
-outline: none;
-
-color: var(--text-main);
-
-}
-
-.icon-btn {
-
-background: white;
-
-border: none;
-
-width: 45px;
-
-height: 45px;
-
-border-radius: 50%;
-
-cursor: pointer;
-
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-transition: 0.3s;
-
-box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-
-}
-
-.icon-btn:hover { transform: scale(1.05); background: var(--primary); }
-
-.icon-btn svg { width: 20px; height: 20px; fill: var(--text-main); transition: 0.3s; }
-
-.icon-btn:hover svg { fill: white; }
-
-.ads-grid {
-
-display: grid;
-
-grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-
-gap: 20px;
-
-padding: 0 1.5rem;
-
-max-width: 1200px;
-
-margin: 0 auto;
-
-}
-
-.ad-card {
-
-background: var(--glass);
-
-backdrop-filter: blur(20px);
-
-border: 1px solid var(--glass-border);
-
-border-radius: 24px;
-
-overflow: hidden;
-
-transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-box-shadow: 0 10px 20px rgba(0,0,0,0.03);
-
-position: relative;
-
-}
-
-.ad-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-
-.ad-image { width: 100%; height: 200px; object-fit: cover; }
-
-.ad-content { padding: 1.5rem; }
-
-.ad-price { font-weight: 800; font-size: 1.2rem; color: var(--secondary); }
-
-.ad-title { font-weight: 600; margin: 5px 0; font-size: 1.1rem; }
-
-.ad-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between; margin-top: 10px; }
-
-.badge-don {
-
-position: absolute;
-
-top: 15px;
-
-left: 15px;
-
-background: var(--accent);
-
-color: white;
-
-padding: 5px 12px;
-
-border-radius: 12px;
-
-font-size: 0.75rem;
-
-font-weight: 700;
-
-box-shadow: 0 4px 10px rgba(0,255,136,0.3);
-
-z-index: 10;
-
-}
-
-.tab-bar {
-
-position: fixed;
-
-bottom: 20px;
-
-left: 50%;
-
-transform: translateX(-50%);
-
-width: 90%;
-
-max-width: 500px;
-
-height: 70px;
-
-background: rgba(255, 255, 255, 0.6);
-
-backdrop-filter: blur(25px);
-
-border: 1px solid var(--glass-border);
-
-border-radius: 35px;
-
-display: flex;
-
-justify-content: space-around;
-
-align-items: center;
-
-box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-
-z-index: 1000;
-
-}
-
-.tab-item {
-
-cursor: pointer;
-
-display: flex;
-
-flex-direction: column;
-
-align-items: center;
-
-color: var(--text-muted);
-
-transition: 0.3s;
-
-text-decoration: none;
-
-}
-
-.tab-item svg { width: 24px; height: 24px; fill: currentColor; transition: 0.3s; }
-
-.tab-item:hover, .tab-item.active { color: var(--primary); }
-
-.tab-add {
-
-width: 60px;
-
-height: 60px;
-
-background: white;
-
-border-radius: 50%;
-
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-
-transition: 0.3s;
-
-cursor: pointer;
-
-border: none;
-
-}
-
-.tab-add:hover { transform: scale(1.1) rotate(90deg); background: var(--primary); }
-
-.tab-add svg { width: 30px; height: 30px; fill: var(--primary); transition: 0.3s; }
-
-.tab-add:hover svg { fill: white; }
-
-.modal {
-
-position: fixed;
-
-top: 0; left: 0; width: 100%; height: 100%;
-
-background: rgba(0,0,0,0.3);
-
-backdrop-filter: blur(10px);
-
-display: none;
-
-justify-content: center;
-
-align-items: center;
-
-z-index: 2000;
-
-}
-
-.modal-content {
-
-background: rgba(255, 255, 255, 0.8);
-
-backdrop-filter: blur(30px);
-
-padding: 2.5rem;
-
-border-radius: 30px;
-
-width: 90%;
-
-max-width: 450px;
-
-border: 1px solid white;
-
-box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-
-animation: slideUp 0.4s ease-out;
-
-position: relative;
-
-}
-
-@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-.modal-content h2 { margin-bottom: 1.5rem; text-align: center; font-weight: 800; }
-
-.form-group { margin-bottom: 1.2rem; }
-
-.form-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: var(--text-muted); }
-
-.form-group input, .form-group select, .form-group textarea {
-
-width: 100%;
-
-padding: 12px;
-
-border-radius: 12px;
-
-border: 1px solid #ddd;
-
-background: rgba(255,255,255,0.5);
-
-outline: none;
-
-font-size: 1rem;
-
-}
-
-.btn-submit {
-
-width: 100%;
-
-padding: 15px;
-
-border-radius: 15px;
-
-border: none;
-
-background: linear-gradient(to right, var(--primary), var(--secondary));
-
-color: white;
-
-font-weight: 700;
-
-font-size: 1rem;
-
-cursor: pointer;
-
-transition: 0.3s;
-
-margin-top: 1rem;
-
-}
-
-.btn-submit:hover { opacity: 0.9; transform: scale(1.02); }
-
-.close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 1.5rem; }
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière Express | Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --accent: #00ff88;
+            --bg-gradient: linear-gradient(135deg, #e0f2f1 0%, #ffffff 100%);
+            --glass: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.9);
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg-gradient); min-height: 100vh; color: var(--text-main); padding-bottom: 100px; }
+        .blob { position: fixed; width: 400px; height: 400px; filter: blur(80px); opacity: 0.2; z-index: -1; border-radius: 50%; }
+        .blob-1 { top: -100px; right: -100px; background: #a29bfe; }
+        .blob-2 { bottom: -100px; left: -100px; background: #81ecec; }
+        header { padding: 2rem 1.5rem; text-align: center; }
+        .logo { font-size: 2rem; font-weight: 800; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1.5rem; }
+        .search-container { display: flex; gap: 10px; max-width: 600px; margin: 0 auto 2rem; padding: 8px; background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.05); }
+        .search-input { flex: 1; border: none; background: transparent; padding: 12px 15px; font-size: 1rem; outline: none; color: var(--text-main); }
+        .icon-btn { background: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .icon-btn svg { width: 20px; height: 20px; fill: var(--text-main); }
+        .ads-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 0 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .ad-card { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 24px; overflow: hidden; transition: 0.4s; box-shadow: 0 10px 20px rgba(0,0,0,0.03); position: relative; }
+        .ad-image { width: 100%; height: 200px; object-fit: cover; }
+        .ad-content { padding: 1.5rem; }
+        .ad-price { font-weight: 800; font-size: 1.2rem; color: var(--secondary); }
+        .ad-title { font-weight: 600; margin: 5px 0; font-size: 1.1rem; }
+        .ad-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between; margin-top: 10px; }
+        .badge-don { position: absolute; top: 15px; left: 15px; background: var(--accent); color: white; padding: 5px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; z-index: 10; }
+        .tab-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 500px; height: 70px; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 35px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 15px 35px rgba(0,0,0,0.1); z-index: 1000; }
+        .tab-item { cursor: pointer; display: flex; flex-direction: column; align-items: center; color: var(--text-muted); text-decoration: none; }
+        .tab-item svg { width: 24px; height: 24px; fill: currentColor; }
+        .tab-item.active { color: var(--primary); }
+        .tab-add { width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0,0,0,0.1); cursor: pointer; border: none; }
+        .tab-add svg { width: 30px; height: 30px; fill: var(--primary); }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        .modal-content { background: white; padding: 2.5rem; border-radius: 30px; width: 90%; max-width: 450px; position: relative; animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: var(--text-muted); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; outline: none; }
+        .btn-submit { width: 100%; padding: 15px; border-radius: 15px; border: none; background: linear-gradient(to right, var(--primary), var(--secondary)); color: white; font-weight: 700; cursor: pointer; }
+        .close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 1.5rem; }
+    </style>
 </head>
-
 <body>
-
-<div class="blob blob-1"></div>
-
-<div class="blob blob-2"></div>
-
-<header>
-
-<div class="logo">Lumière Express</div>
-
-<div class="search-container">
-
-<input type="text" class="search-input" placeholder="Que recherchez-vous ?">
-
-<button class="icon-btn" onclick="openModal('modal-login')">
-
-<svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-
-</button>
-
-<button class="icon-btn">
-
-<svg viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>
-
-</button>
-
-</div>
-
-</header>
-
-<div class="ads-grid">
-
-<div class="ad-card">
-
-<img src="https://images.unsplash.com/photo-1505740420928-5e564714933a?auto=format&fit=crop&w=500&q=80" class="ad-image">
-
-<div class="ad-content">
-
-<div class="ad-price">120 €</div>
-
-<div class="ad-title">Casque Audio Premium</div>
-
-<div class="ad-meta"><span>📍 Paris</span><span>🕒 2h ago</span></div>
-
-</div>
-
-</div>
-
-<div class="ad-card">
-
-<div class="badge-don">DON GRATUIT</div>
-
-<img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=500&q=80" class="ad-image">
-
-<div class="ad-content">
-
-<div class="ad-price">Gratuit</div>
-
-<div class="ad-title">Livre : L'Art du Design</div>
-
-<div class="ad-meta"><span>📍 Lyon</span><span>🕒 5h ago</span></div>
-
-</div>
-
-</div>
-
-<div class="ad-card">
-
-<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80" class="ad-image">
-
-<div class="ad-content">
-
-<div class="ad-price">85 €</div>
-
-<div class="ad-title">Montre Minimaliste</div>
-
-<div class="ad-meta"><span>📍 Marseille</span><span>🕒 1d ago</span></div>
-
-</div>
-
-</div>
-
-<div class="ad-card">
-
-<div class="badge-don">DON GRATUIT</div>
-
-<img src="https://images.unsplash.com/photo-1581235720703-97f566733362?auto=format&fit=crop&w=500&q=80" class="ad-image">
-
-<div class="ad-content">
-
-<div class="ad-price">Gratuit</div>
-
-<div class="ad-title">Lampe de Bureau Vintage</div>
-
-<div class="ad-meta"><span>📍 Bordeaux</span><span>🕒 3h ago</span></div>
-
-</div>
-
-</div>
-
-</div>
-
-<nav class="tab-bar">
-
-<a href="#" class="tab-item active">
-
-<svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-
-</a>
-
-<a href="#" class="tab-item" onclick="openModal('modal-login')">
-
-<svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67
-
-Vas-y, continue, on voit, il est, il est coupé.
-Je m'excuse, le code a été coupé à cause de la limite de caractères. Voici la suite et la fin du code (à partir de la Tab Bar et incluant tous les formulaires).
-
-Remplace tout ce qui suit la balise <nav class="tab-bar"> par ceci :
-
-Copier        <a href="#" class="tab-item active">
-            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-        </a>
-        <a href="#" class="tab-item" onclick="openModal('modal-login')">
-            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-        </a>
-        <button class="tab-add" onclick="openModal('modal-ad')">
-            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-        </button>
-        <a href="#" class="tab-item" onclick="openModal('modal-login')">
-            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-        </a>
-        <a href="#" class="tab-item">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-        </a>
+    <div class="blob blob-1"></div><div class="blob blob-2"></div>
+    <header>
+        <div class="logo">Lumière Express</div>
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Que recherchez-vous ?">
+            <button class="icon-btn" onclick="openModal('modal-login')"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></button>
+            <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg></button>
+        </div>
+    </header>
+    <div class="ads-grid">
+        <div class="ad-card"><img src="https://images.unsplash.com/photo-1505740420928-5e564714933a?w=500" class="ad-image"><div class="ad-content"><div class="ad-price">120 €</div><div class="ad-title">Casque Audio Premium</div><div class="ad-meta"><span>📍 Paris</span><span>🕒 2h</span></div></div></div>
+        <div class="ad-card"><div class="badge-don">DON GRATUIT</div><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500" class="ad-image"><div class="ad-content"><div class="ad-price">Gratuit</div><div class="ad-title">Livre : L'Art du Design</div><div class="ad-meta"><span>📍 Lyon</span><span>🕒 5h</span></div></div></div>
+        <div class="ad-card"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" class="ad-image"><div class="ad-content"><div class="ad-price">85 €</div><div class="ad-title">Montre Minimaliste</div><div class="ad-meta"><span>📍 Marseille</span><span>🕒 1d</span></div></div></div>
+        <div class="ad-card"><div class="badge-don">DON GRATUIT</div><img src="https://images.unsplash.com/photo-1581235720703-97f566733362?w=500" class="ad-image"><div class="ad-content"><div class="ad-price">Gratuit</div><div class="ad-title">Lampe Vintage</div><div class="ad-meta"><span>📍 Bordeaux</span><span>🕒 3h</span></div></div></div>
+    </div>
+    <nav class="tab-bar">
+        <a href="#" class="tab-item active"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></a>
+        <a href="#" class="tab-item" onclick="openModal('modal-login')"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></a>
+        <button class="tab-add" onclick="openModal('modal-ad')"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+        <a href="#" class="tab-item" onclick="openModal('modal-login')"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></a>
+        <a href="#" class="tab-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></a>
     </nav>
-
-    <!-- MODAL CONNEXION -->
-    <div id="modal-login" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('modal-login')">&times;</span>
-            <h2>Connexion</h2>
-            <form>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="exemple@mail.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Mot de passe</label>
-                    <input type="password" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="btn-submit">Se connecter</button>
-            </form>
-            <p style="text-align:center; margin-top:15px; font-size:0.9rem; color:var(--text-muted);">
-                Pas de compte ? <a href="#" onclick="openModal('modal-signup')" style="color:var(--primary); font-weight:600;">S'inscrire</a>
-            </p>
-        </div>
-    </div>
-
-    <!-- MODAL INSCRIPTION -->
-    <div id="modal-signup" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('modal-signup')">&times;</span>
-            <h2>Créer un compte</h2>
-            <form>
-                <div class="form-group">
-                    <label>Nom complet</label>
-                    <input type="text" placeholder="Jean Dupont" required>
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="exemple@mail.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Mot de passe</label>
-                    <input type="password" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="btn-submit">S'inscrire</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL PUBLICATION -->
-    <div id="modal-ad" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('modal-ad')">&times;</span>
-            <h2>Publier une annonce</h2>
-            <form>
-                <div class="form-group">
-                    <label>Titre de l'objet</label>
-                    <input type="text" placeholder="Ex: iPhone 13 Pro" required>
-                </div>
-                <div class="form-group">
-                    <label>Type d'annonce</label>
-                    <select>
-                        <option value="vente">Vente</option>
-                        <option value="don">Don Gratuit 🎁</option>
-                        <option value="échange">Échange</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Prix (€) - Laissez 0 pour un don</label>
-                    <input type="number" placeholder="0.00">
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea rows="3" placeholder="Décrivez votre objet..."></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Publier l'annonce</button>
-            </form>
-        </div>
-    </div>
-
+    <div id="modal-login" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-login')">&times;</span><h2>Connexion</h2><form><div class="form-group"><label>Email</label><input type="email" required></div><div class="form-group"><label>Mot de passe</label><input type="password" required></div><button type="submit" class="btn-submit">Se connecter</button></form></div></div>
+    <div id="modal-signup" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-signup')">&times;</span><h2>Inscription</h2><form><div class="form-group"><label>Nom</label><input type="text" required></div><div class="form-group"><label>Email</label><input type="email" required></div><div class="form-group"><label>Mot de passe</label><input type="password" required></div><button type="submit" class="btn-submit">S'inscrire</button></form></div></div>
+    <div id="modal-ad" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-ad')">&times;</span><h2>Publier</h2><form><div class="form-group"><label>Titre</label><input type="text" required></div><div class="form-group"><label>Type</label><select><option>Vente</option><option>Don Gratuit 🎁</option></select></div><div class="form-group"><label>Prix</label><input type="number"></div><button type="submit" class="btn-submit">Publier</button></form></div></div>
     <script>
-        function openModal(id) {
-            document.getElementById(id).style.display = 'flex';
-        }
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-        // Fermer la modale en cliquant à l'extérieur
-        window.onclick = function(event) {
-            if (event.target.className === 'modal') {
-                event.target.style.display = 'none';
-            }
-        }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        window.onclick = function(e) { if (e.target.className === 'modal') { e.target.style.display = 'none'; } }
     </script>
 </body>
-</html
+</html>
