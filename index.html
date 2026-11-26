@@ -3,173 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumière Express | EOS 27 Edition</title>
+    <title>Lumière Express | L'Éclat du Partage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #050505;
-            --accent-color: #00f2ff;
-            --accent-glow: rgba(0, 242, 255, 0.5);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-main: #ffffff;
-            --text-dim: #b0b0b0;
-            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --primary-color: #00d2ff;
+            --secondary-color: #3a7bd5;
+            --bg-gradient: linear-gradient(135deg, #e0f2f1 0%, #ffffff 50%, #f0f4f8 100%);
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --text-main: #2c3e50;
+            --text-muted: #546e7a;
+            --accent-glow: rgba(0, 210, 255, 0.3);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
+            background: var(--bg-gradient);
+            background-attachment: fixed;
             color: var(--text-main);
-            overflow-x: hidden;
             min-height: 100vh;
-            background: radial-gradient(circle at top right, #101a25, #050505);
+            overflow-x: hidden;
+            padding-bottom: 100px;
         }
 
-        /* Background Glows */
-        .glow {
+        .blob {
             position: fixed;
-            width: 300px;
-            height: 300px;
-            background: var(--accent-color);
-            filter: blur(120px);
-            opacity: 0.15;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(255,255,255,0) 70%);
             z-index: -1;
-            pointer-events: none;
+            filter: blur(50px);
+            animation: move 20s infinite alternate;
         }
-        .glow-1 { top: -100px; right: -100px; }
-        .glow-2 { bottom: -100px; left: -100px; }
+        .blob-1 { top: -100px; left: -100px; }
+        .blob-2 { bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(58, 123, 213, 0.2) 0%, rgba(255,255,255,0) 70%); }
 
-        /* Header */
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 100px); }
+        }
+
         header {
-            padding: 2rem 1.5rem;
+            padding: 40px 20px;
             text-align: center;
-            animation: fadeInDown 0.8s ease;
+            animation: fadeInDown 0.8s ease-out;
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff 30%, var(--accent-color));
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
             letter-spacing: -1px;
         }
 
-        /* Main Content */
+        .tagline {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
         .container {
-            padding: 0 1.5rem 100px 1.5rem;
-            max-width: 600px;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .hero-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
+        .search-container {
+            margin: 30px auto;
+            max-width: 600px;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 18px 25px;
+            border-radius: 50px;
             border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .hero-card h1 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero-card p {
-            color: var(--text-dim);
-            margin-bottom: 2rem;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: var(--accent-color);
-            color: #000;
-            padding: 1rem 2rem;
-            border-radius: 15px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-block;
-            transition: var(--transition);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px var(--accent-color);
-            filter: brightness(1.1);
-        }
-
-        /* Grid of items */
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .item-card {
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: var(--shadow);
+            font-size: 1rem;
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .search-bar:focus {
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(0, 210, 255, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 1rem;
-            transition: var(--transition);
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            animation: fadeInUp 1s ease backwards;
+            animation: fadeInUp 1s ease-out both;
         }
 
-        .item-card:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--accent-color);
-            transform: scale(1.02);
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.05);
+            border-color: var(--primary-color);
         }
 
-        .item-card .icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            display: block;
+        .card-img {
+            width: 100%;
+            height: 180px;
+            background: #f8f9fa;
+            border-radius: 18px;
+            margin-bottom: 15px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        .item-card h3 {
-            font-size: 0.9rem;
-            margin-bottom: 0.2rem;
+        .card:hover .card-img {
+            transform: scale(1.05);
         }
 
-        .item-card p {
-            font-size: 0.75rem;
-            color: var(--text-dim);
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
         }
 
-        /* TAB BAR - The requested feature */
+        .card-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
         .tab-bar {
             position: fixed;
-            bottom: 20px;
+            bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
-            max-width: 400px;
+            max-width: 450px;
             height: 70px;
-            background: rgba(15, 15, 15, 0.6);
-            backdrop-filter: blur(30px) saturate(200%);
-            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: 25px;
+            border-radius: 35px;
             display: flex;
             justify-content: space-around;
             align-items: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             padding: 0 10px;
         }
 
@@ -178,121 +196,178 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: var(--text-dim);
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.65rem;
-            transition: var(--transition);
-            flex: 1;
+            font-size: 0.7rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
             position: relative;
         }
 
-        .tab-item .icon {
+        .tab-item i {
             font-size: 1.4rem;
             margin-bottom: 4px;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .tab-item.active {
-            color: var(--accent-color);
+            color: var(--primary-color);
         }
 
-        .tab-item.active .icon {
+        .tab-item.active i {
             transform: translateY(-5px);
-            filter: drop-shadow(0 0 8px var(--accent-color));
+            text-shadow: 0 0 10px var(--accent-glow);
         }
 
         .tab-item:hover {
-            color: #fff;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--primary-color);
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .tab-item.add-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            margin-top: -30px;
+            box-shadow: 0 8px 20px var(--accent-glow);
+            border: 4px solid white;
         }
+
+        .tab-item.add-btn i {
+            margin-bottom: 0;
+            font-size: 1.6rem;
+        }
+
+        .tab-item.add-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+        }
+
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive */
-        @media (max-width: 400px) {
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .logo { font-size: 2rem; }
             .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
 
     <header>
-        <div class="logo">LUMIÈRE EXPRESS</div>
+        <div class="logo">Lumière Express</div>
+        <div class="tagline">L'éclat du partage entre particuliers</div>
     </header>
 
     <div class="container">
-        <div class="hero-card">
-            <h1>L'expérience EOS 27 <br><span style="color: var(--accent-color)">Liquid Glass</span></h1>
-            <p>Vendez, achetez et partagez dans un univers futuriste. Rapidité, transparence et design pur.</p>
-            <a href="#" class="btn-primary">Commencer maintenant</a>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Que recherchez-vous aujourd'hui ?">
         </div>
 
         <div class="grid">
-            <div class="item-card" style="animation-delay: 0.2s">
-                <span class="icon">⚡</span>
-                <h3>Rapidité</h3>
-                <p>Transactions instantanées.</p>
+            <div class="card" style="animation-delay: 0.1s">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e56471468d8?w=500&q=80" alt="Produit" class="card-img">
+                <div class="card-title">Casque Audio Premium</div>
+                <div class="card-price">120 €</div>
+                <div class="card-footer">
+                    <span><i class="fa-solid fa-location-dot"></i> Paris</span>
+                    <span>Il y a 2h</span>
+                </div>
             </div>
-            <div class="item-card" style="animation-delay: 0.3s">
-                <span class="icon">💎</span>
-                <h3>Premium</h3>
-                <p>Interface ultra-réaliste.</p>
+            <div class="card" style="animation-delay: 0.2s">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" alt="Produit" class="card-img">
+                <div class="card-title">Montre Minimaliste</div>
+                <div class="card-price">85 €</div>
+                <div class="card-footer">
+                    <span><i class="fa-solid fa-location-dot"></i> Lyon</span>
+                    <span>Il y a 5h</span>
+                </div>
             </div>
-            <div class="item-card" style="animation-delay: 0.4s">
-                <span class="icon">🌐</span>
-                <h3>Global</h3>
-                <p>Accès partout, tout le temps.</p>
+            <div class="card" style="animation-delay: 0.3s">
+                <img src="https://images.unsplash.com/photo-1542291026-704266067591?w=500&q=80" alt="Produit" class="card-img">
+                <div class="card-title">Appareil Photo Vintage</div>
+                <div class="card-price">210 €</div>
+                <div class="card-footer">
+                    <span><i class="fa-solid fa-location-dot"></i> Marseille</span>
+                    <span>Il y a 1j</span>
+                </div>
             </div>
-            <div class="item-card" style="animation-delay: 0.5s">
-                <span class="icon">🛡️</span>
-                <h3>Sécure</h3>
-                <p>Protection EOS 27 intégrée.</p>
+            <div class="card" style="animation-delay: 0.4s">
+                <img src="https://images.unsplash.com/photo-1585333124946-9757667d674d?w=500&q=80" alt="Produit" class="card-img">
+                <div class="card-title">Sac à Dos Voyage</div>
+                <div class="card-price">45 €</div>
+                <div class="card-footer">
+                    <span><i class="fa-solid fa-location-dot"></i> Bordeaux</span>
+                    <span>Il y a 3h</span>
+                </div>
+            </div>
+            <div class="card" style="animation-delay: 0.5s">
+                <img src="https://images.unsplash.com/photo-1526170375885-4a30967395a7?w=500&q=80" alt="Produit" class="card-img">
+                <div class="card-title">Polaroid Instantané</div>
+                <div class="card-price">60 €</div>
+                <div class="card-footer">
+                    <span><i class="fa-solid fa-location-dot"></i> Lille</span>
+                    <span>Il y a 12h</span>
+                </div>
+            </div>
+            <div class="card" style="animation-delay: 0.6s">
+                <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&q=80" alt="Produit" class="card-img">
+                <div class="card-title">Lunettes de Soleil</div>
+                <div class="card-price">30 €</div>
+                <div class="card-footer">
+                    <span><i class="fa-solid fa-location-dot"></i> Nice</span>
+                    <span>Il y a 8h</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- TAB BAR -->
     <nav class="tab-bar">
         <a href="#" class="tab-item active">
-            <span class="icon">🏠</span>
+            <i class="fa-solid fa-house"></i>
             <span>Accueil</span>
         </a>
         <a href="#" class="tab-item">
-            <span class="icon">🔍</span>
+            <i class="fa-solid fa-magnifying-glass"></i>
             <span>Explorer</span>
         </a>
-        <a href="#" class="tab-item">
-            <span class="icon">➕</span>
-            <span>Publier</span>
+        <a href="#" class="tab-item add-btn">
+            <i class="fa-solid fa-plus"></i>
         </a>
         <a href="#" class="tab-item">
-            <span class="icon">💬</span>
-            <span>Messages</span>
+            <i class="fa-solid fa-heart"></i>
+            <span>Favoris</span>
         </a>
         <a href="#" class="tab-item">
-            <span class="icon">👤</span>
+            <i class="fa-solid fa-user"></i>
             <span>Profil</span>
         </a>
     </nav>
 
     <script>
-        // Simple script for tab switching effect
         const tabs = document.querySelectorAll('.tab-item');
         tabs.forEach(tab => {
-            tab.addEventListener('click', (e) => {
-                e.preventDefault();
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
+            tab.addEventListener('click', function(e) {
+                if(!this.classList.contains('add-btn')) {
+                    e.preventDefault();
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                }
             });
         });
     </script>
