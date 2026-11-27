@@ -6,6 +6,7 @@
     <title>Lumière Express | Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+    <style>
         :root {
             --primary: #00d2ff;
             --secondary: #3a7bd5;
@@ -18,7 +19,11 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background: var(--bg-gradient); min-height: 100vh; color: var(--text-main); padding-bottom: 100px; }
+        
+        #networkCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        
         .blob { position: fixed; width: 400px; height: 400px; filter: blur(80px); opacity: 0.2; z-index: -1; border-radius: 50%; }
+
         .blob-1 { top: -100px; right: -100px; background: #a29bfe; }
         .blob-2 { bottom: -100px; left: -100px; background: #81ecec; }
         header { padding: 2rem 1.5rem; text-align: center; }
