@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadrunner Solution | Facturation Intelligente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #06b6d4;
+            --bg-light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --shadow: 0 20px 50px rgba(0,0,0,0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Outfit', sans-serif; }
+
+        body {
+            background: var(--bg-light);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Background Liquid Elements */
+        .liquid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.6;
+        }
+        .blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            animation: move 20s infinite alternate;
+        }
+        .blob-1 { top: -200px; right: -100px; background: #bfdbfe; }
+        .blob-2 { bottom: -200px; left: -100px; background: #cffafe; }
+        .blob-3 { top: 30%; left: 20%; background: #dbeafe; width: 400px; height: 400px; }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(100px, 50px) scale(1.1); }
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 10%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 8px;
+        }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .btn-nav {
+            background: var(--primary);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 600 !important;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 10% 100px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #1e3a8a, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .btn-main {
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-3px); background: var(--primary-dark); }
+        .btn-secondary {
+            background: var(--glass);
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.9); }
+
+        /* Billing Preview Section */
+        .preview-container {
+            margin-top: 60px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        .billing-card {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            width: 100%;
+            max-width: 900px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        .invoice-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .invoice-details { text-align: right; color: var(--text-muted); font-size: 0.9rem; }
+        
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        .invoice-table th {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 2px solid var(--glass-border);
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .invoice-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .total-section {
+            display: flex;
+            justify-content: flex-end;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        .total-item { text-align: right; }
+        .total-label { color: var(--text-muted); font-size: 0.9rem; }
+        .total-value { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+
+        /* Features Section */
+        .features {
+            padding: 100px 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 24px;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+        }
+        .feature-card:hover { transform: translateY(-10px); background: white; box-shadow: var(--shadow); }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: #dbeafe;
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        .feature-card h3 { margin-bottom: 15px; font-size: 1.3rem; }
+        .feature-card p { color: var(--text-muted); line-height: 1.6; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .cta-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <nav>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            Roadrunner Solution
+        </div>
+        <ul class="nav-links">
+            <li><a href="#features">Fonctionnalités</a></li>
+            <li><a href="#pricing">Tarifs</a></li>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#" class="btn-nav">Essai Gratuit</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>La facturation en ligne <br>en mode éclair.</h1>
+        <p>Simplifiez votre gestion financière avec Roadrunner Solution. Une interface liquide, un flux fluide et une précision absolue pour vos factures et paiements.</p>
+        <div class="cta-group">
+            <a href="#" class="btn-main btn-primary">Démarrer maintenant</a>
+            <a href="#" class="btn-main btn-secondary">Voir la démo</a>
+        </div>
+
+        <div class="preview-container">
+            <div class="billing-card">
+                <div class="invoice-header">
+                    <div class="invoice-title">FACTURE #RR-2024-001</div>
+                    <div class="invoice-details">
+                        Date: 24 Mai 2024<br>
+                        Client: Entreprise Alpha
+                    </div>
+                </div>
+                <table class="invoice-table">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Quantité</th>
+                            <th>Prix Unitaire</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Abonnement SaaS Premium - Mensuel</td>
+                            <td>1</td>
+                            <td>49.00 €</td>
+                            <td>49.00 €</td>
+                        </tr>
+                        <tr>
+                            <td>Configuration Initiale Setup</td>
+                            <td>1</td>
+                            <td>150.00 €</td>
+                            <td>150.00 €</td>
+                        </tr>
+                        <tr>
+                            <td>Support Prioritaire 24/7</td>
+                            <td>1</td>
+                            <td>25.00 €</td>
+                            <td>25.00 €</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="total-section">
+                    <div class="total-item">
+                        <div class="total-label">Sous-total</div>
+                        <div class="total-value" style="font-size: 1.1rem; color: var(--text-main);">224.00 €</div>
+                    </div>
+                    <div class="total-item">
+                        <div class="total-label">TVA (20%)</div>
+                        <div class="total-value" style="font-size: 1.1rem; color: var(--text-main);">44.80 €</div>
+                    </div>
+                    <div class="total-item">
+                        <div class="total-label">Total à payer</div>
+                        <div class="total-value">268.80 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Rapidité Éclair</h3>
+            <p>Générez et envoyez vos factures en quelques secondes grâce à notre moteur d'automatisation ultra-rapide.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💎</div>
+            <h3>Design Premium</h3>
+            <p>Offrez à vos clients une expérience de paiement moderne avec des factures élégantes et professionnelles.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>Sécurité Totale</h3>
+            <p>Vos données financières sont cryptées et sécurisées selon les normes bancaires les plus strictes.</p>
+        </div>
+    </section>
+
+</body>
+</html>
