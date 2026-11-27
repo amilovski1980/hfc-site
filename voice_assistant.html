@@ -2,15 +2,15 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Lumière Express — Assistant Vocal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière Express - Neural Interface</title>
     <style>
         :root {
             --bg-color: #0a0a0c;
-            --accent-blue: #00d2ff;
+            --accent-blue: #00d4ff;
             --accent-gold: #ffd700;
-            --text-color: #e0e0e0;
-            --glow-color: rgba(0, 210, 255, 0.3);
+            --accent-white: #ffffff;
+            --text-color: rgba(255, 255, 255, 0.7);
         }
 
         body, html {
@@ -21,270 +21,284 @@
             overflow: hidden;
             background-color: var(--bg-color);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--text-color);
         }
 
-        /* Fond avec gradient radial pour la profondeur */
-        .background-glow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0c 100%);
-            z-index: -1;
-        }
-
-        #networkCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .ui-container {
+        #canvas-container {
             position: relative;
-            z-index: 10;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, #1a1a20 0%, #0a0a0c 100%);
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
+        }
+
+        .ui-overlay {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
             pointer-events: none;
         }
 
-        /* Bouton Micro Central */
-        .mic-container {
-            position: relative;
-            pointer-events: auto;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .mic-container:active {
-            transform: scale(0.95);
+        .status-text {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.6;
+            transition: opacity 0.5s ease;
         }
 
         .mic-button {
+            pointer-events: all;
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-blue), #007bff);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 30px var(--glow-color);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-            z-index: 2;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
         }
 
-        .mic-icon {
+        .mic-button:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .mic-button svg {
+            width: 30px;
+            height: 30px;
             fill: white;
-            width: 32px;
-            height: 32px;
+            filter: drop-shadow(0 0 5px var(--accent-blue));
         }
 
-        /* Halo pulsé autour du micro */
         .halo {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100px;
-            height: 100px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            background: var(--glow-color);
-            animation: pulse 2s infinite ease-in-out;
-            z-index: 1;
+            border: 2px solid var(--accent-blue);
+            animation: pulse 2s infinite;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .active .halo {
+            opacity: 1;
         }
 
         @keyframes pulse {
-            0% { width: 80px; height: 80px; opacity: 0.8; }
-            100% { width: 180px; height: 180px; opacity: 0; }
-        }
-
-        /* Indicateur d'état */
-        .status-container {
-            position: absolute;
-            bottom: 10%;
-            text-align: center;
-            width: 100%;
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        .status-text {
-            font-size: 1.1rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            opacity: 0.7;
-            text-transform: uppercase;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.8); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="background-glow"></div>
+
+<div id="canvas-container">
     <canvas id="networkCanvas"></canvas>
-
-    <div class="ui-container">
-        <div class="mic-container" id="startAudio">
+    
+    <div class="ui-overlay">
+        <div class="status-text" id="status">L'assistant vous écoute...</div>
+        <div class="mic-button" id="micBtn">
             <div class="halo"></div>
-            <div class="mic-button">
-                <svg class="mic-icon" viewBox="0 0 24 24">
-                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-                </svg>
-            </div>
-        </div>
-
-        <div class="status-container">
-            <div class="status-text" id="statusText">Cliquez pour activer l'écoute</div>
+            <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
         </div>
     </div>
+</div>
 
-    <script>
-        const canvas = document.getElementById('networkCanvas');
-        const ctx = canvas.getContext('2d');
-        const statusText = document.getElementById('statusText');
-        const startBtn = document.getElementById('startAudio');
+<script>
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    const micBtn = document.getElementById('micBtn');
+    const statusText = document.getElementById('status');
 
-        let width, height, centerX, centerY;
-        let particles = [];
-        const particleCount = 120;
-        let audioContext, analyser, dataArray;
-        let isListening = false;
-        let volume = 0;
+    let width, height, centerX, centerY;
+    let particles = [];
+    let audioContext, analyser, dataArray;
+    let isListening = false;
+    let volume = 0;
 
-        function resize() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            centerX = width / 2;
-            centerY = height / 2;
+    const PARTICLE_COUNT = 400; // Plus dense pour l'effet "massive web"
+    const CONNECTION_DIST = 100;
+    const COLORS = ['#00d4ff', '#ffffff', '#ffd700', '#a2d2ff'];
+
+    function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        centerX = width / 2;
+        centerY = height / 2;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor() {
+            this.reset();
         }
 
-        window.addEventListener('resize', resize);
-        resize();
+        reset() {
+            // Distribution sphérique fractale
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos((Math.random() * 2) - 1);
+            const r = Math.random() * 300;
 
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.angle = Math.random() * Math.PI * 2;
-                this.distance = 100 + Math.random() * 200;
-                this.baseDistance = this.distance;
-                this.size = Math.random() * 2 + 1;
-                this.speed = (Math.random() * 0.01) + 0.005;
-                
-                const colors = ['#00d2ff', '#ffffff', '#ffd700'];
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-            }
-
-            update() {
-                this.angle += this.speed;
-                
-                // Réaction au volume : les particules s'écartent du centre
-                const reaction = volume * 1.5; 
-                this.distance = this.baseDistance + reaction;
-
-                this.x = centerX + Math.cos(this.angle) * this.distance;
-                this.y = centerY + Math.sin(this.angle) * this.distance;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = this.color;
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        async function setupAudio() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                analyser = audioContext.createAnalyser();
-                analyser.fftSize = 256;
-                const source = audioContext.createMediaStreamSource(stream);
-                source.connect(analyser);
-                dataArray = new Uint8Array(analyser.frequencyBinCount);
-                isListening = true;
-                statusText.innerText = "L'assistant vous écoute...";
-            } catch (err) {
-                console.error("Erreur micro:", err);
-                statusText.innerText = "Accès micro refusé";
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
+            this.x = centerX + r * Math.sin(phi) * Math.cos(theta);
+            this.y = centerY + r * Math.sin(phi) * Math.sin(theta);
+            this.z = r * Math.cos(phi); // Profondeur simulée
             
-            if (isListening) {
-                analyser.getByteFrequencyData(dataArray);
-                let sum = 0;
-                for (let i = 0; i < dataArray.length; i++) {
-                    sum += dataArray[i];
-                }
-                // Interpolation douce du volume
-                const targetVolume = sum / dataArray.length;
-                volume += (targetVolume - volume) * 0.15;
-            }
-
-            for (let i = 0; i < particles.length; i++) {
-                const p1 = particles[i];
-                p1.update();
-                p1.draw();
-
-                for (let j = i + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
-                    const dx = p1.x - p2.x;
-                    const dy = p1.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 120) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(0, 210, 255, ${0.2 * (1 - dist / 120)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
+            this.baseR = r;
+            this.vx = (Math.random() - 0.5) * 0.2;
+            this.vy = (Math.random() - 0.5) * 0.2;
+            this.radius = Math.random() * 1.5 + 0.5;
+            this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
         }
 
-        startBtn.addEventListener('click', () => {
-            if (!isListening) {
-                setupAudio();
-            }
-        });
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
 
-        initParticles();
-        animate();
-    </script>
+            // Retour vers le centre pour maintenir la structure sphérique
+            const dx = this.x - centerX;
+            const dy = this.y - centerY;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            
+            // Réaction au volume audio
+            const audioPush = volume * 1.5;
+            const targetDist = this.baseR + audioPush;
+            
+            const force = (targetDist - dist) * 0.01;
+            this.vx += (dx / dist) * force;
+            this.vy += (dy / dist) * force;
+
+            // Friction
+            this.vx *= 0.98;
+            this.vy *= 0.98;
+
+            if (dist > 600) this.reset();
+        }
+
+        draw() {
+            const opacity = Math.min(1, (this.z + 300) / 600);
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = opacity;
+            ctx.shadowBlur = 8 * opacity;
+            ctx.shadowColor = this.color;
+            ctx.fill();
+        }
+    }
+
+    function init() {
+        particles = [];
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push(new Particle());
+        }
+    }
+
+    async function setupAudio() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = audioContext.createAnalyser();
+            analyser.fftSize = 256;
+            const source = audioContext.createMediaStreamSource(stream);
+            source.connect(analyser);
+            dataArray = new Uint8Array(analyser.frequencyBinCount);
+            return true;
+        } catch (err) {
+            console.error("Audio error:", err);
+            return false;
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+        
+        if (isListening && analyser) {
+            analyser.getByteFrequencyData(dataArray);
+            let sum = 0;
+            for(let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+            const targetVolume = sum / dataArray.length;
+            volume += (targetVolume - volume) * 0.1; // Interpolation douce
+        } else {
+            volume += (0 - volume) * 0.05;
+        }
+
+        // Trier les particules par Z pour un effet de profondeur
+        particles.sort((a, b) => b.z - a.z);
+
+        for (let i = 0; i < particles.length; i++) {
+            const p1 = particles[i];
+            p1.update();
+            p1.draw();
+
+            for (let j = i + 1; j < particles.length; j++) {
+                const p2 = particles[j];
+                const dx = p1.x - p2.x;
+                const dy = p1.y - p2.y;
+                const distSq = dx*dx + dy*dy;
+
+                if (distSq < CONNECTION_DIST * CONNECTION_DIST) {
+                    const dist = Math.sqrt(distSq);
+                    ctx.beginPath();
+                    ctx.strokeStyle = p1.color;
+                    ctx.globalAlpha = (1 - dist / CONNECTION_DIST) * 0.2;
+                    ctx.lineWidth = 0.5;
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
+            }
+        }
+        
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+        requestAnimationFrame(animate);
+    }
+
+    micBtn.addEventListener('click', async () => {
+        if (!isListening) {
+            const success = await setupAudio();
+            if (success) {
+                isListening = true;
+                micBtn.classList.add('active');
+                statusText.style.opacity = "1";
+                statusText.innerText = "L'assistant vous écoute...";
+            }
+        } else {
+            isListening = false;
+            micBtn.classList.remove('active');
+            statusText.style.opacity = "0.6";
+            statusText.innerText = "L'assistant est en veille";
+        }
+    });
+
+    init();
+    animate();
+</script>
 </body>
 </html>
